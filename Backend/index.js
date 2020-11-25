@@ -9,7 +9,7 @@ mongoose.Promise = global.Promise;
 
 mongoose.connect('mongodb://localhost:27017/api_rest_blog', { useNewUrlParser: true, useUnifiedTopology: true})
         .then(() => {
-            console.log("Conexion a la BDD exitosa!!!");
+            console.log("La conexión a la BDD se ha realizado exitosamente!!!");
 
             //Crear servidor y ponerme a escuchar peticiones HTTP
             app.listen(port, () => {
