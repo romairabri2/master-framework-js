@@ -75,10 +75,10 @@ var controller = {
 
     getArticles: (req, res) => {
         var query = Article.find({});
-        
+
         var last = req.params.last;
         if(last || last!= indefined){
-            query.limit(2);
+            query.limit(5);
         }
         
         //Find
@@ -99,11 +99,63 @@ var controller = {
             }
 
             return res.status(200).send({
-                status: 'success',
-                articles
+                    status: 'success',
+                    articles
+                });
+        
+        });      
+    },
+
+    getArticle: (req, res) => {
+    
+        //Recoger el Id de la url
+        var articleId = req.params.id;
+
+        //Comprobar que existe        
+        if(!articleId || articleId == null){
+            
+            return res.status(404).send({
+                status: 'error',
+                message: 'No hay articulo para mostrar !!!'
             });
-        });       
+        }
+
+        //Buscar el articulo
+        Article.findById(articleId, (err, article) => {
+            
+            if(err || !article){
+                return res.status(404).send({
+                    status: 'error',
+                    message: 'El artículo no existe !!!'
+                });
+            }
+
+            return res.status(200).send({
+                status: 'success',
+                article
+            });
+        });
+        //Devolverlo en Json
+    },
+    
+    update: (req, res) => {
+
+        //Recoger el Id del articulo por la url
+
+        //Recoger los datos que llegan por put
+
+        //Validar datos
+
+        //Find and update
+
+        
+        return res.status(404).send({
+            status: 'error',
+            message: 'Error al actualizar'
+        });
     }
+
+
 
 }; //end controller
 
